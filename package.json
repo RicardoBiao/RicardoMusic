@@ -1,5 +1,5 @@
 {
-  "name": "Vue3MusicApp",
+  "name": "RicardoMusic",
   "version": "1.0.0",
   "private": true,
   "description": "vue3 + ts + pinia + taro 的音乐app",
@@ -36,12 +36,13 @@
   "dependencies": {
     "@babel/runtime": "^7.7.7",
     "@tarojs/components": "3.4.3",
+    "@tarojs/plugin-framework-vue3": "3.4.3",
     "@tarojs/runtime": "3.4.3",
     "@tarojs/taro": "3.4.3",
-    "@tarojs/plugin-framework-vue3": "3.4.3",
-    "vue": "^3.2.24",
+    "@vueuse/core": "^8.1.1",
     "pinia": "^2.0.6",
-    "taro-plugin-pinia": "^1.0.0"
+    "taro-plugin-pinia": "^1.0.0",
+    "vue": "^3.2.24"
   },
   "devDependencies": {
     "@types/webpack-env": "^1.13.6",

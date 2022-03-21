@@ -1,15 +1,26 @@
+/*
+ * @Author: liweibiao
+ * @Date: 2022-03-18 17:33:46
+ * @LastEditTime: 2022-03-21 16:58:55
+ * @LastEditors: liweibiao
+ * @Description: 
+ */
 const config = {
   projectName: 'Vue3MusicApp',
   date: '2022-3-18',
-  designWidth: 750,
+  designWidth: 375,
   deviceRatio: {
     640: 2.34 / 2,
     750: 1,
-    828: 1.81 / 2
+    828: 1.81 / 2,
+    375: 2 / 1
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
-  plugins: ['taro-plugin-pinia'],
+  plugins: ['taro-plugin-pinia', '@tarojs/plugin-html'],
+  scss: {
+    data: `@import "@nutui/nutui-taro/dist/styles/variables.scss";`,
+  },
   defineConstants: {
   },
   copy: {

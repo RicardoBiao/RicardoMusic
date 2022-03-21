@@ -2,7 +2,7 @@
   "miniprogramRoot": "./dist",
   "projectname": "Vue3MusicApp",
   "description": "vue3 + ts + pinia + taro 的音乐app",
-  "appid": "touristappid",
+  "appid": "wx9d843ec1db3493bb",
   "setting": {
     "urlCheck": true,
     "es6": false,

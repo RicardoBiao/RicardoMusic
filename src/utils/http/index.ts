@@ -1,13 +1,14 @@
 /*
  * @Author: liweibiao
  * @Date: 2022-03-21 10:52:46
- * @LastEditTime: 2022-03-21 17:07:12
+ * @LastEditTime: 2022-03-22 11:31:30
  * @LastEditors: liweibiao
  * @Description: 
  */
 
 import Taro from "@tarojs/taro"
 import qs from "qs"
+import interceptor from './interceptor'
 
 type Method = 'OPTIONS' | 'GET' | 'HEAD' | 'POST' | 'PUT' | 'DELETE' | 'TRACE' | 'CONNECT'
 type OptionType = {
@@ -18,6 +19,9 @@ type OptionType = {
     success?: any,
     error?: any,
 }
+
+
+Taro.addInterceptor(interceptor)
 
 class Http {
 

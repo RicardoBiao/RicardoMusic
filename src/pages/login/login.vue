@@ -1,7 +1,9 @@
+import Taro from '@tarojs/taro';
+consoleimport Taro from '@tarojs/taro';
 <!--
  * @Author: liweibiao
  * @Date: 2022-03-21 15:51:54
- * @LastEditTime: 2022-03-21 16:51:05
+ * @LastEditTime: 2022-03-22 12:11:01
  * @LastEditors: liweibiao
  * @Description: 
 -->
@@ -21,6 +23,7 @@
         />
 
         <nut-button type="primary" @click="login()">login</nut-button>
+        <nut-button type="primary" @click="getUserInfo()">getUserInfo</nut-button>
 
 	</view>
 </template>
@@ -30,6 +33,7 @@
 import { API } from '../../module'
 import { reactive } from 'vue'
 import './login.scss'
+import Taro from '@tarojs/taro';
 
 
  const page = reactive({
@@ -49,9 +53,22 @@ import './login.scss'
          password: page.state.password
      }).then( res => {
          console.log("login===>", res)
+         
      }).catch( err => {
          console.error("login===>", err)
      })
+ }
+
+ const getUserInfo = () => {
+     API.getUserAccount({
+         cookie: Taro.getStorageSync('cookies')
+     })
+        .then( res => {
+            console.log('getUserAccount-res===>', res)
+        })
+        .catch( err => {
+            console.log('getUserAccount-err ===>', err)
+        })
  }
 
 

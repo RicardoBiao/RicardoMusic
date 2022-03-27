@@ -9,9 +9,25 @@ export const useSongStore = defineStore('song', () => {
   innerAudioContext.onPlay( ()=> {
     console.log(' onPlay ===>', innerAudioContext.src)
   })
+
   const setAudioUrl = (url: string) => {
     innerAudioContext.src = url
-    innerAudioContext.play()
   }
-  return {currentSong, innerAudioContext, setAudioUrl}
+
+  const musicPlay = () => {
+    if( innerAudioContext.src || innerAudioContext.paused) {
+      innerAudioContext.play()
+    } else {
+      Taro.showToast({
+        title: '暂无歌曲可播放'
+      })
+    }
+  }
+
+  const musicPause = () => {
+    if(!innerAudioContext.paused) {
+      innerAudioContext.pause()
+    }
+  }
+  return {currentSong, innerAudioContext, setAudioUrl, musicPlay, musicPause}
 })

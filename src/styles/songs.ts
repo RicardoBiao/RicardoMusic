@@ -1,10 +1,11 @@
 interface Song {
-  name?: String,
-  id?: String,
-  picUrl?: String,
-  subhead?: String,
-  singerName?: String,
-  singerId?: String,
+  name?: string,
+  id?: string,
+  picUrl?: string,
+  subhead?: string,
+  singerName?: string,
+  singerId?: string,
+  url?: string
 }
 
 

@@ -7,54 +7,52 @@
 -->
 
 <template>
-  <view class></view>
+  <view></view>
 </template>
 
 <script lang="ts" setup>
 
-import { API } from '../../module'
+// import { API } from '../../module'
 import { reactive } from 'vue'
 import './player.scss'
-import Taro, { useDidShow } from '@tarojs/taro'
+import { useDidShow } from '@tarojs/taro'
 import { useSongStore } from '../../stores/song'
+import { Song } from 'src/styles/songs'
 
 const songStore = useSongStore()
 
 
 
-/** 路由参数 */
-const routerParams = Taro.getCurrentInstance().router?.params
-const { id = '' } = ( routerParams as any )
-console.log(' id ===>', id)
 
 useDidShow(() => {
   console.log('onShow')
-  console.log(' songStore ===>', songStore.currentSong)
-  if( id ) {
-    getSongDetail(id)
+  console.log(' song 1 ===>', page.song)
+  if(page.song.url) {
+    songStore.setAudioUrl(page.song.url)
+    console.log(' songStore ===>', songStore.innerAudioContext)
   }
 })
 
-const page = reactive({
-  state: {
-    song: {},
-  },
-  methods: {
-
-  },
-
+const page = reactive<{
+  song: Song,
+  muted: boolean,
+  autoplay: boolean,
+}>({
+  song: songStore.currentSong,
+  muted: false,
+  autoplay: false,
 })
 
 
-const getSongDetail = (id: string) => {
-  API.getSongDetail({
-    ids: id
-  }).then(res => {
-    console.log(' getSongDetail-res===>', res)
-  }).catch(err => {
-    console.log(' getSongDetail-err===>', err)
-  })
-}
+// const getSongDetail = (id: string) => {
+//   API.getSongDetail({
+//     ids: id
+//   }).then(res => {
+//     console.log(' getSongDetail-res===>', res)
+//   }).catch(err => {
+//     console.log(' getSongDetail-err===>', err)
+//   })
+// }
 
 </script>
 

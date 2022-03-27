@@ -7,7 +7,7 @@
  */
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import { Button, Input, Icon, Skeleton, List} from '@nutui/nutui-taro';
+import { Button, Input, Icon, Skeleton, List, Audio} from '@nutui/nutui-taro';
 // 定制化主题必须使用 scss
 import '@nutui/nutui-taro/dist/styles/themes/default.scss';
 // 导入全局样式
@@ -26,5 +26,6 @@ App.use(Input)
 App.use(Icon)
 App.use(Skeleton)
 App.use(List)
+App.use(Audio)
 
 export default App

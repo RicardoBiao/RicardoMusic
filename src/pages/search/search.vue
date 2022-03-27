@@ -61,7 +61,7 @@ useDidShow(() => {
 const search = () => {
   API.searchMusic({
     keywords: page.keywork,
-    offset: (page.pageNum-1) * page.limit, // 偏移数量，用于分页 , 如 : 如 :( 页数 -1)*30, 其中 30 为 limit 的值 , 默认为 0
+    offset: (page.pageNum - 1) * page.limit, // 偏移数量，用于分页 , 如 : 如 :( 页数 -1)*30, 其中 30 为 limit 的值 , 默认为 0
     limit: page.limit,
     type: page.type
   }).then(res => {
@@ -69,7 +69,7 @@ const search = () => {
     if (res.statusCode === 200) {
       const data = res.data.result
       page.songCount = data.songCount
-      initSongList(data.songs)
+      _initSongList(data.songs)
       page.pageNum++
     }
   }).catch(err => {
@@ -91,30 +91,36 @@ const handleScroll = () => {
   // console.log(' handleScroll ===>')
 }
 
-const getMusicUrl = (id: string) => {
-  API.getSongUrl({
+const _getMusicUrl = async (id: string = '') => {
+  if (!id) {
+    return
+  }
+  return API.getSongUrl({
     id
-  }).then( res => {
-    if( res.statusCode === 200) {
+  }).then(res => {
+    if (res.statusCode === 200) {
       console.log(' getSongUrl-res===>', res.data.data[0].url)
+      return res.data.data[0].url
     }
-  }).catch( err => {
+  }).catch(err => {
     console.log(' getSongUrl-err===>', err)
   })
-
 }
 
 const toPlayer = (item: Song) => {
-  songStore.currentSong = item
-  Taro.navigateTo({
-    url: PATH.PLAYER
+  _getMusicUrl(item.id).then( res => {
+    item.url = res
+    songStore.currentSong = item
+    Taro.navigateTo({
+      url: PATH.PLAYER
+    })
   })
 }
 
 /**
  * 重构歌曲列表（过滤无用字段和拼接分页数据）
  */
-const initSongList = (arr: any[]) => {
+const _initSongList = (arr: any[]) => {
   const result = arr.map(item => {
     let newItem: Song = {}
     newItem.name = item.name
@@ -125,7 +131,7 @@ const initSongList = (arr: any[]) => {
     newItem.singerId = item.ar[0].id
     return newItem
   })
-  if(page.pageNum > 1) {
+  if (page.pageNum > 1) {
     page.musicResultList = page.musicResultList.concat(result)
   } else {
     page.musicResultList = result

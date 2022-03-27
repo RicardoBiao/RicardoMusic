@@ -1,15 +1,13 @@
-import Taro from '@tarojs/taro';
-consoleimport Taro from '@tarojs/taro';
 <!--
  * @Author: liweibiao
  * @Date: 2022-03-21 15:51:54
- * @LastEditTime: 2022-03-22 12:11:01
+ * @LastEditTime: 2022-03-27 09:55:54
  * @LastEditors: liweibiao
- * @Description: 
+ * @Description:
 -->
 
 <template>
-    <view>
+    <view class="">
         <nut-input placeholder="请输入账号"
             v-model="page.state.email"
             :require-show="true"
@@ -42,9 +40,9 @@ import Taro from '@tarojs/taro';
         password: "qinqinqin753"
      },
      methods: {
-         
+
      },
-     
+
  })
 
  const login = () => {
@@ -53,7 +51,7 @@ import Taro from '@tarojs/taro';
          password: page.state.password
      }).then( res => {
          console.log("login===>", res)
-         
+
      }).catch( err => {
          console.error("login===>", err)
      })

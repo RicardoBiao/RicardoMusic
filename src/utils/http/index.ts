@@ -3,7 +3,7 @@
  * @Date: 2022-03-21 10:52:46
  * @LastEditTime: 2022-03-22 11:31:30
  * @LastEditors: liweibiao
- * @Description: 
+ * @Description:
  */
 
 import Taro from "@tarojs/taro"
@@ -27,17 +27,17 @@ class Http {
 
     /**
      * 基础请求
-     * @param options 
+     * @param options
      */
     baseRequest<T = any>(options: OptionType) {
-        console.log(options)
+        // console.log(options)
         return Taro.request<T>({
             ...options,
             success: function (res) {
-              console.log(res.data)
+              // console.log(res.data)
             },
             fail: function (err) {
-                console.log(err)
+                // console.log(err)
             }
           })
     }
@@ -48,7 +48,7 @@ class Http {
      * @template T
      * @param {string} url
      * @param {Object} [data]
-     * @return {*} 
+     * @return {*}
      * @memberof Http
      */
     get<T = any>(url: string, data?: Object) {
@@ -62,7 +62,7 @@ class Http {
      * @template T
      * @param {string} url
      * @param {Object} [data]
-     * @return {*} 
+     * @return {*}
      * @memberof Http
      */
     postJson<T = any>(url: string, data?: Object) {
@@ -76,7 +76,7 @@ class Http {
      * @template T
      * @param {string} url
      * @param {Object} [data]
-     * @return {*} 
+     * @return {*}
      * @memberof Http
      */
     postData<T = any>(url: string, data?: Object) {
@@ -90,7 +90,7 @@ class Http {
      * @template T
      * @param {string} url
      * @param {Object} [data]
-     * @return {*} 
+     * @return {*}
      * @memberof Http
      */
     postFrom<T = any>(url: string, data?: Object) {

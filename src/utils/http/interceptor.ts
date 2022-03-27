@@ -11,20 +11,20 @@ import Taro, { Chain } from "@tarojs/taro"
 const interceptor = function (chain: Chain) {
     const requestParams = chain.requestParams
     const { method, data, url } = requestParams
-    console.log(`http ${method || 'GET'} --> ${url} data: `, data)
+    // console.log(`http ${method || 'GET'} --> ${url} data: `, data)
 
     // add cookie in header
     const cookies = Taro.getStorageSync('cookies') || ''
     const token = Taro.getStorageSync('token') || ''
-    
+
     if (url.indexOf("/login") === -1 && cookies && token) {
       requestParams.header.cookie = cookies
       requestParams.header.token = token
     }
-  
+
     return chain.proceed(requestParams)
       .then(res => {
-        console.log(`http <-- ${url} result:`, res)
+        // console.log(`http <-- ${url} result:`, res)
         if (url.indexOf("/login")) {
           let cookies = ''
           res.cookies.forEach((cookie, index) => {

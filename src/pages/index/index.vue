@@ -1,6 +1,6 @@
 <template>
   <view class="index">
-    <music-bar/>
+    <music-bar :name="'index'"/>
   </view>
 </template>
 

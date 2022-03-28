@@ -7,7 +7,7 @@
 -->
 
 <template>
-  <view class>
+  <view>
     <nut-input placeholder="请输入账号" v-model="page.state.email" :require-show="true" label="Email" />
     <nut-input
       placeholder="请输入密码"
@@ -21,7 +21,7 @@
     <nut-button type="primary" @click="getUserInfo()">getUserInfo</nut-button>
 
 
-    <music-bar/>
+    <music-bar :name="'login'"/>
   </view>
 </template>
 

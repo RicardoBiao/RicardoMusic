@@ -33,6 +33,7 @@ import './search.scss'
 import Taro, { useDidShow } from '@tarojs/taro'
 import { Song } from '../../styles/songs'
 import { useSongStore } from '../../stores/song'
+import { _getMusicUrl } from '../../utils/music'
 
 const songStore = useSongStore()
 
@@ -94,21 +95,6 @@ const handleScroll = () => {
   // console.log(' handleScroll ===>')
 }
 
-const _getMusicUrl = async (id: string = '') => {
-  if (!id) {
-    return
-  }
-  return API.getSongUrl({
-    id
-  }).then(res => {
-    if (res.statusCode === 200) {
-      console.log(' getSongUrl-res===>', res.data.data[0].url)
-      return res.data.data[0].url
-    }
-  }).catch(err => {
-    console.log(' getSongUrl-err===>', err)
-  })
-}
 
 const toPlayer = (item: Song) => {
   _getMusicUrl(item.id).then( res => {

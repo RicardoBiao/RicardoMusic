@@ -7,10 +7,8 @@
     <view>progress: {{ page.progress }}</view>
     <nut-button type="primary" @click="nextSong">next</nut-button>
     <nut-button type="primary" @click="prevSong">pre</nut-button>
-    <nut-avatar
-      size="large"
-      :icon="page.song.picUrl"
-    ></nut-avatar>
+    <nut-avatar size="large" :icon="page.song.picUrl"></nut-avatar>
+    {{page.song.picUrl}}
     <nut-cell>
       <nut-progress :percentage="page.progress" :show-text="false" stroke-height="12" />
     </nut-cell>
@@ -21,7 +19,7 @@
 <script lang="ts" setup>
 import './music-bar.scss'
 import { reactive, getCurrentInstance, onMounted } from 'vue'
-import { InnerAudioContext } from '@tarojs/taro'
+import { InnerAudioContext, useDidShow } from '@tarojs/taro'
 import { useSongStore } from '../../stores/song'
 import { Song } from 'src/styles/songs'
 
@@ -29,29 +27,36 @@ import { Song } from 'src/styles/songs'
 const innerAudioContext: InnerAudioContext = getCurrentInstance()?.appContext.config.globalProperties.$innerAudioContext
 const songStore = useSongStore()
 
-
 const page = reactive<{
   song: Song,
   progress: number,
   paused: boolean
 }>({
-  song: songStore.currentSong,
+  song: {},
   progress: 0,
   paused: false
 })
 
-
-innerAudioContext.onTimeUpdate(() => {
-  //音频进度更新事件
-  let current = innerAudioContext.currentTime;
-  let duration = innerAudioContext.duration;
-  page.progress = (current / duration) * 100
-  // console.log(' progress(musicBar) ===>', page.progress)
-})
+const props = defineProps<{
+  name: string
+}>()
 
 onMounted(() => {
-  console.log('onShow(music-bar)===>', innerAudioContext)
-  console.log(' song (music-bar) ===>', page.song)
+  // console.log('onShow(music-bar)===>', innerAudioContext)
+  // console.log(' song (music-bar) ===>', page.song)
+})
+
+useDidShow(() => {
+  // 获取当前歌曲
+  page.song = songStore.currentSong
+  innerAudioContext.onTimeUpdate(() => {
+    //音频进度更新事件
+    let current = innerAudioContext.currentTime;
+    let duration = innerAudioContext.duration;
+    page.progress = (current / duration) * 100
+    console.log(' progress(musicBar) ===>', props.name , page.progress)
+  })
+
 })
 
 

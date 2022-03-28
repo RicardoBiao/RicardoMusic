@@ -8,3 +8,4 @@ export const useSongStore = defineStore('song', () => {
     currentSong,
   }
 })
+

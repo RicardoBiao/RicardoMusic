@@ -21,7 +21,7 @@
 <script lang="ts" setup>
 import './music-bar.scss'
 import { reactive, getCurrentInstance, onMounted } from 'vue'
-import { InnerAudioContext, useDidShow } from '@tarojs/taro'
+import { InnerAudioContext } from '@tarojs/taro'
 import { useSongStore } from '../../stores/song'
 import { Song } from 'src/styles/songs'
 

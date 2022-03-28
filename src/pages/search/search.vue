@@ -8,7 +8,7 @@
 
 <template>
   <view>
-    <input type="text" style="background-color: aqua;" :value="page.keywork" />
+    <input type="text" style="background-color: aqua;" v-model="page.keywork" />
     <nut-button type="primary" @click="search">search</nut-button>
 
 
@@ -45,7 +45,7 @@ const page = reactive<{
   pageNum: number,
   methods: any
 }>({
-  keywork: "雨爱",
+  keywork: '汪苏泷',
   musicResultList: [],
   songCount: 0,
   limit: 30, // 搜索返回数量，默认30
@@ -61,6 +61,7 @@ useDidShow(() => {
 })
 
 const search = () => {
+  console.log(' page.keywork ===>', page.keywork)
   API.searchMusic({
     keywords: page.keywork,
     offset: (page.pageNum - 1) * page.limit, // 偏移数量，用于分页 , 如 : 如 :( 页数 -1)*30, 其中 30 为 limit 的值 , 默认为 0

@@ -1,17 +1,12 @@
 <template>
   <view class="index">
-    <Counter />
+    <music-bar/>
   </view>
 </template>
 
-<script>
+<script lang="ts" setup>
 import './index.scss'
-import Counter from '../../components/Counter.vue'
+import MusicBar from '../../components/music-bar/music-bar.vue'
 
-export default {
-  name: 'Index',
-  components: {
-    Counter
-  }
-}
+
 </script>

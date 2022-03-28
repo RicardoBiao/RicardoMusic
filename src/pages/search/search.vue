@@ -10,6 +10,8 @@
   <view>
     <input type="text" style="background-color: aqua;" :value="page.keywork" />
     <nut-button type="primary" @click="search">search</nut-button>
+
+
     <nut-list
       v-if="page.musicResultList"
       :height="50"
@@ -28,9 +30,9 @@
 import { API, PATH } from '../../module'
 import { reactive } from 'vue'
 import './search.scss'
-import Taro, { useDidShow } from '@tarojs/taro';
+import Taro, { useDidShow } from '@tarojs/taro'
 import { Song } from '../../styles/songs'
-import { useSongStore } from '../../stores/song';
+import { useSongStore } from '../../stores/song'
 
 const songStore = useSongStore()
 

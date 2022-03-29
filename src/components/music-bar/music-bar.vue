@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <!-- <view>
     <nut-button type="primary" @click="songPlay">play</nut-button>
     <nut-button type="primary" @click="songPause">pause</nut-button>
     <nut-button type="primary" @click="songStop">stop</nut-button>
@@ -12,6 +12,17 @@
     <nut-cell>
       <nut-progress :percentage="page.progress" :show-text="false" stroke-height="12" />
     </nut-cell>
+  </view>-->
+  <nut-progress :size="'small'" :stroke-color="'#ef01a0'" :percentage="page.progress" :show-text="false" stroke-width="10" />
+  <view class="bar">
+    <nut-avatar size="large" :icon="page.song.picUrl"></nut-avatar>
+    <view class="song-name">{{ page.song.name }}</view>
+    <view class="song-btn">
+      <image src="../../assets/static/upsong.png" @click="prevSong" />
+      <image src="../../assets/static/play.png" v-if="!page.paused" @click="songPlay" />
+      <image src="../../assets/static/pause2.png" v-else @click="songPause" />
+      <image src="../../assets/static/nextsong.png" @click="nextSong" />
+    </view>
   </view>
 </template>
 
@@ -54,7 +65,7 @@ useDidShow(() => {
     let current = innerAudioContext.currentTime;
     let duration = innerAudioContext.duration;
     page.progress = (current / duration) * 100
-    console.log(' progress(musicBar) ===>', props.name , page.progress)
+    console.log(' progress(musicBar) ===>', props.name, page.progress)
   })
 
 })
@@ -77,11 +88,11 @@ const songPause = () => {
 }
 
 /** 停止播放音乐 */
-const songStop = () => {
-  if (!innerAudioContext.paused) {
-    innerAudioContext.stop()
-  }
-}
+// const songStop = () => {
+//   if (!innerAudioContext.paused) {
+//     innerAudioContext.stop()
+//   }
+// }
 
 /** 下一首歌 */
 const nextSong = () => {

@@ -1,5 +1,5 @@
 <template>
-  <view class="index">
+  <view class="app-bgc">
     <music-bar :name="'index'"/>
   </view>
 </template>

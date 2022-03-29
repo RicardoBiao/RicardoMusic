@@ -1,0 +1,25 @@
+.search-bar {
+  background-color: #0e0b1f;
+  .nut-searchbar__search-input {
+    background-color: #363942;
+	  border: solid 2rpx #363942;
+    border-radius: 10rpx;
+    font-family: Helvetica;
+    font-size: 32rpx;
+    color: #eee;
+    .nut-searchbar__input-clear text {
+      color: #eee !important;
+    }
+  }
+}
+
+.search-list {
+  padding: 20rpx 5vw;
+  .list-item {
+    background-color: #0e0b1f;
+    color: #eee;
+    width: 90vw;
+    box-shadow: none;
+    border: #eee solid 2rpx;
+  }
+}

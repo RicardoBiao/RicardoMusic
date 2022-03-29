@@ -22,23 +22,9 @@ import { Song } from 'src/styles/songs'
 const songStore = useSongStore()
 const innerAudioContext: InnerAudioContext = getCurrentInstance()?.appContext.config.globalProperties.$innerAudioContext
 
-// innerAudioContext.onTimeUpdate(() => {
-//   //音频进度更新事件
-//   let current = innerAudioContext.currentTime;
-//   let duration = innerAudioContext.duration;
-//   page.progressWidth = (current/duration) * 100
-//   console.log(' progressWidth(play) ===>', page.progressWidth)
-// })
-
 useDidShow(() => {
-  console.log('onShow===>', innerAudioContext)
-  console.log(' song 1 ===>', page.song)
-  if(page.song.url) {
-    innerAudioContext.src = page.song.url
-    innerAudioContext.play()
-    innerAudioContext.loop = true
-    toIndexPage()
-  }
+  init()
+
 })
 
 const page = reactive<{
@@ -53,6 +39,14 @@ const page = reactive<{
   progressWidth: 0
 })
 
+const init = () => {
+  if(page.song.url && (innerAudioContext.src != page.song.url)) {
+    innerAudioContext.src = page.song.url
+    innerAudioContext.play()
+    innerAudioContext.loop = true
+  }
+  toIndexPage()
+}
 
 
 // const getSongDetail = (id: string) => {

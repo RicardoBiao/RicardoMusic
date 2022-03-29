@@ -7,19 +7,21 @@
 -->
 
 <template>
-  <view>
-    <input type="text" style="background-color: aqua;" v-model="page.keywork" />
-    <nut-button type="primary" @click="search">search</nut-button>
-
-
+  <view class="app-bgc">
+    <nut-searchbar v-model="page.keywork" class="search-bar" @search="search">
+      <template v-slot:leftin>
+        <nut-icon size="14" name="search"></nut-icon>
+      </template>
+    </nut-searchbar>
     <nut-list
+      class="search-list"
       v-if="page.musicResultList"
-      :height="50"
+      :height="60"
       :listData="page.musicResultList"
       @scroll="handleScroll"
     >
       <template v-slot="{ item }">
-        <div class="list-item" @click="toPlayer(item)">{{ item.name }}</div>
+        <nut-cell class="list-item" :title="item.name" @click="toPlayer(item)"></nut-cell>
       </template>
     </nut-list>
   </view>
@@ -28,7 +30,7 @@
 <script lang="ts" setup>
 
 import { API, PATH } from '../../module'
-import { reactive } from 'vue'
+import { reactive, watch } from 'vue'
 import './search.scss'
 import Taro, { useDidShow } from '@tarojs/taro'
 import { Song } from '../../styles/songs'
@@ -40,6 +42,7 @@ const songStore = useSongStore()
 const page = reactive<{
   musicResultList: Song[],
   keywork: string,
+  oldKeywork: string,
   songCount: number,
   limit: number,
   type: number,
@@ -47,6 +50,7 @@ const page = reactive<{
   methods: any
 }>({
   keywork: '汪苏泷',
+  oldKeywork: '',
   musicResultList: [],
   songCount: 0,
   limit: 30, // 搜索返回数量，默认30
@@ -61,7 +65,17 @@ useDidShow(() => {
   getSearchDefault()
 })
 
+watch( () => page.keywork, (newWork, oldWork) => {
+  if( newWork != oldWork ) {
+    page.oldKeywork = oldWork
+  }
+})
+
 const search = () => {
+  if(page.keywork != page.oldKeywork) {
+    page.musicResultList = []
+    page.pageNum = 1
+  }
   console.log(' page.keywork ===>', page.keywork)
   API.searchMusic({
     keywords: page.keywork,
@@ -97,9 +111,11 @@ const handleScroll = () => {
 
 
 const toPlayer = (item: Song) => {
-  _getMusicUrl(item.id).then( res => {
-    item.url = res
-    songStore.currentSong = item
+  _getMusicUrl(item.id).then(res => {
+    if(songStore.currentSong?.['url'] != res) {
+      item.url = res
+      songStore.currentSong = item
+    }
     Taro.navigateTo({
       url: PATH.PLAYER
     })

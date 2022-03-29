@@ -1,0 +1,37 @@
+.bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 20rpx;
+  height: 144rpx;
+  align-items: center;
+  line-height: 144rpx;
+  position: fixed;
+  width: calc(100vw - 40rpx);
+  background-color: #0e0b1f;
+
+  .song-name {
+    width: 260rpx;
+    color: #eee;
+  }
+
+  .song-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 231rpx;
+
+    image {
+      height: 50rpx;
+      width: 50rpx;
+    }
+  }
+}
+
+.nut-progress .nut-progress-outer {
+  -webkit-flex: 1 !important;
+  -ms-flex: 1 !important;
+  flex: 1 !important;
+  background-color: #0e0b1f !important;
+  border-radius: 0 !important;
+}

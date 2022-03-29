@@ -13,7 +13,7 @@ export default {
     'pages/player/player',
   ],
   tabBar: {
-    "list": [
+    list: [
       {
         pagePath: "pages/index/index",
         text: "首页"
@@ -26,12 +26,17 @@ export default {
         pagePath: "pages/search/search",
         text: "搜索"
       },
-    ]
+    ],
+    color: '#4e4f52',
+    selectedColor: '#ef01a0',
+    backgroundColor: '#0e0b1f',
+    borderStyle: 'white'
+
   },
   window: {
-    backgroundTextStyle: 'light',
-    navigationBarBackgroundColor: '#fff',
+    backgroundTextStyle: 'dark',
+    navigationBarBackgroundColor: '#0e0b1f',
     navigationBarTitleText: 'WeChat',
-    navigationBarTextStyle: 'black'
+    navigationBarTextStyle: 'white'
   }
 }
